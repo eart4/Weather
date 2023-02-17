@@ -1,6 +1,19 @@
 .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 15px 50px;
+    background: linear-gradient(92.7deg, #4CB8C4 0%, #3CD3AD 100%), #232323;
 }
 .title {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 52px;
+    text-align: center;
+    color: #fff;
+
 }
 .form {
 }
