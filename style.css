@@ -8,6 +8,10 @@ body{
     row-gap: 50px;
     align-items: center;
 }
+
+body, html{
+    min-height: 100vh;
+}
 .header {
     width: 100%;
     display: flex;
@@ -130,9 +134,26 @@ body{
     font-size: 50%;
     vertical-align: super;
 }
-.card-img {
-}
+
 .card-description {
     font-size: 20px;
     line-height: 1.2;
+}
+
+.footer {
+    padding: 7px 15px 8px;
+    background-color: #e3f1ee;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    width: 100%;
+    margin-top: auto;
+}
+
+.footer a{
+
+    color: #2e7695;
+    text-decoration: none;
+}
+.href {
 }
