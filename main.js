@@ -37,33 +37,56 @@ form.onsubmit = function (e) {
     //делакм запрос на сервер
     const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
 
-        //выполняем запрос
-        fetch(url).then((response) => {
-        return response.json()
+    //выполняем запрос
+    fetch(url).then((response) => {
+        return response.json();
     }).then((data) => {
-        console.log(data)
 
-        // разметка для карточки
+        // проверка на ошибку
+        if (data.error) {
 
-        const html = `    <!-- <div class="card">
-  
+            const prevCard = document.querySelector('.card').remove();
+            if (prevCard)
+                prevCard.remove();
 
-        <h2 class="card-city">${data.location.name}<span>${data.locaion.country}</span></h2>
-  
-  
-        <div class="card-weather">
-          <div class="card-value">${data.current.temp_c}<sup>°c</sup> </div>
-          <img class="card-img" src="./images/example.svg" alt="">
-        </div>
-  
-        <div class="card-description">${data.current.condition.text}</div>
-  
-  
-  
-      </div>`;
-      // отображаем карточку на стр
 
-        header.insertAdjacentHTML('afterend', html)
+            const html = `<div class="card">${data.error.message}</div>`;
+
+            header.insertAdjacentHTML('afterend', html);
+
+
+
+        } else {
+            const prevCard = document.querySelector('.card');
+            if (prevCard)
+                prevCard.remove();
+            // разметка для карточки
+
+            const html = `<div class="card">
+      
+    
+            <h2 class="card-city">${data.location.name}<span>${data.location.country}</span></h2>
+      
+      
+            <div class="card-weather">
+              <div class="card-value">${data.current.temp_c}<sup>°c</sup></div>
+              <img class="card-img" src="./images/example.svg" alt="">
+            </div>
+      
+            <div class="card-description">${data.current.condition.text}</div>
+      
+      
+      
+          </div>`;
+            // отображаем карточку на стр
+
+            header.insertAdjacentHTML('afterend', html);
+        }
+
+        console.log(data);
+
+        // удаляем старыекарточки
+
 
     });
 }
