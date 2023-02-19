@@ -15,11 +15,13 @@ const query = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=London`
 
 /* Получаем название города */
 
-
+const header = document.querySelector('.header')
 const form = document.querySelector('#form');
 
 const input = document.querySelector('#inputCity');
-let city;
+
+
+
 
 /* Слушаем отправку формы */
 
@@ -30,7 +32,7 @@ form.onsubmit = function (e) {
 
     // берем значение импута обрезаем пробулы
 
-    city = input.value.trim();
+    let city = input.value.trim();
 
     //делакм запрос на сервер
     const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
@@ -60,6 +62,8 @@ form.onsubmit = function (e) {
   
       </div>`;
       // отображаем карточку на стр
+
+        header.insertAdjacentHTML('afterend', html)
 
     });
 }
