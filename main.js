@@ -1,3 +1,7 @@
+import conditions from './conditions.js';
+
+console.log(conditions);
+
 const apiKey = 'ba916fb4e5924beab11125540231902'
 const query = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=London`
 const header = document.querySelector('.header')
@@ -10,9 +14,11 @@ function removeCard(){
 }
 
 function showError(errorMessage){
-    const html = `<div class="card">${data.error.message}</div>`;
+    const html = `<div class="card">${errorMessage}</div>`;
     header.insertAdjacentHTML('afterend', html);
 }
+
+
 
 function showCard({name , country, temp, condition}){
     const html = `<div class="card">
@@ -44,6 +50,8 @@ async function getWeather(city){
 
 
 
+
+
 form.onsubmit = async function (e) {
     // отменяем отправку формы
     e.preventDefault();
@@ -61,13 +69,19 @@ if (data.error) {
 
 } else {
     removeCard();
+    const info = conditions.find(
+       (obj) => obj.code === data.current.condition.code 
+    );
+
+    const condition = data.current.is_day ? info.languages[23]['day_text'] : info.languages[23]['night_text'];
+    
 
     const weatherData = {
         name: data.location.name, 
         country: data.location.country, 
         temp:data.current.temp_c,
-        condition :data.current.condition.text
-    }
+        condition: condition,
+    };
     showCard(weatherData);
 }
 
