@@ -40,5 +40,26 @@ form.onsubmit = function (e) {
         return response.json()
     }).then((data) => {
         console.log(data)
-    })
+
+        // разметка для карточки
+
+        const html = `    <!-- <div class="card">
+  
+
+        <h2 class="card-city">${data.location.name}<span>${data.locaion.country}</span></h2>
+  
+  
+        <div class="card-weather">
+          <div class="card-value">${data.current.temp_c}<sup>°c</sup> </div>
+          <img class="card-img" src="./images/example.svg" alt="">
+        </div>
+  
+        <div class="card-description">${data.current.condition.text}</div>
+  
+  
+  
+      </div>`;
+      // отображаем карточку на стр
+
+    });
 }
