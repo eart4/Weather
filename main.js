@@ -20,7 +20,19 @@ const form = document.querySelector('#form');
 
 const input = document.querySelector('#inputCity');
 
+function removeCard(){
+    const prevCard = document.querySelector('.card').remove();
+    if (prevCard)
+        prevCard.remove();
+}
 
+
+
+function showError(errorMessage){
+    const html = `<div class="card">${data.error.message}</div>`;
+
+    header.insertAdjacentHTML('afterend', html);
+}
 
 
 /* Слушаем отправку формы */
@@ -45,14 +57,10 @@ form.onsubmit = function (e) {
         // проверка на ошибку
         if (data.error) {
 
-            const prevCard = document.querySelector('.card').remove();
-            if (prevCard)
-                prevCard.remove();
+            removeCard();
 
+            showError(data.error.message);
 
-            const html = `<div class="card">${data.error.message}</div>`;
-
-            header.insertAdjacentHTML('afterend', html);
 
 
 
