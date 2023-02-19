@@ -21,9 +21,8 @@ const form = document.querySelector('#form');
 const input = document.querySelector('#inputCity');
 
 function removeCard(){
-    const prevCard = document.querySelector('.card').remove();
-    if (prevCard)
-        prevCard.remove();
+    const prevCard = document.querySelector('.card');
+    if (prevCard) prevCard.remove();
 }
 
 
@@ -34,6 +33,27 @@ function showError(errorMessage){
     header.insertAdjacentHTML('afterend', html);
 }
 
+function showCard(name, country, temp_c, condition){
+    const html = `<div class="card">
+
+
+<h2 class="card-city">${name}<span>${country}</span></h2>
+
+
+<div class="card-weather">
+  <div class="card-value">${temp_c}<sup>°c</sup></div>
+  <img class="card-img" src="./images/example.svg" alt="">
+</div>
+
+<div class="card-description">${condition}</div>
+
+
+
+</div>`;
+// отображаем карточку на стр
+
+header.insertAdjacentHTML('afterend', html);
+}
 
 /* Слушаем отправку формы */
 
@@ -58,38 +78,25 @@ form.onsubmit = function (e) {
         if (data.error) {
 
             removeCard();
-
             showError(data.error.message);
 
 
 
 
         } else {
-            const prevCard = document.querySelector('.card');
-            if (prevCard)
-                prevCard.remove();
+
+            removeCard();
             // разметка для карточки
+            showCard(
+                data.location.name, 
+                data.location.country, 
+                data.current.temp_c,
+                data.current.condition.text
+            );
 
-            const html = `<div class="card">
-      
-    
-            <h2 class="card-city">${data.location.name}<span>${data.location.country}</span></h2>
-      
-      
-            <div class="card-weather">
-              <div class="card-value">${data.current.temp_c}<sup>°c</sup></div>
-              <img class="card-img" src="./images/example.svg" alt="">
-            </div>
-      
-            <div class="card-description">${data.current.condition.text}</div>
-      
-      
-      
-          </div>`;
-            // отображаем карточку на стр
 
-            header.insertAdjacentHTML('afterend', html);
-        }
+            }
+            
 
         console.log(data);
 
