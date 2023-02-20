@@ -1,9 +1,10 @@
+
 import conditions from './conditions.js';
 
 console.log(conditions);
 
-const apiKey = 'ba916fb4e5924beab11125540231902'
-const query = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=London`
+const apiKey = 'ba916fb4e5924beab11125540231902';
+
 const header = document.querySelector('.header')
 const form = document.querySelector('#form');
 const input = document.querySelector('#inputCity');
@@ -53,9 +54,8 @@ async function getWeather(city){
 
 
 form.onsubmit = async function (e) {
-    // отменяем отправку формы
+    // Cancel form submission
     e.preventDefault();
-
     // берем значение импута обрезаем пробулы
 
     let city = input.value.trim();
